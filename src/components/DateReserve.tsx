@@ -9,29 +9,62 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Stack from "@mui/material/Stack";
+import { Dayjs } from "dayjs";
 
-export default function DateReserve() {
+export default function DateReserve({
+  nameLastname,
+  tel,
+  venue,
+  bookDate,
+  onNameLastnameChange,
+  onTelChange,
+  onVenueChange,
+  onBookDateChange,
+}: {
+  nameLastname: string;
+  tel: string;
+  venue: string;
+  bookDate: Dayjs | null;
+  onNameLastnameChange: (value: string) => void;
+  onTelChange: (value: string) => void;
+  onVenueChange: (value: string) => void;
+  onBookDateChange: (value: Dayjs | null) => void;
+}) {
   return (
     <Stack spacing={3} className="w-full max-w-[420px]">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker label="Event Date" />
+        <DatePicker
+          label="Event Date"
+          value={bookDate}
+          onChange={onBookDateChange}
+        />
       </LocalizationProvider>
 
       <TextField
         variant="standard"
         name="Name-Lastname"
         label="Name-Lastname"
+        value={nameLastname}
+        onChange={(e) => onNameLastnameChange(e.target.value)}
       />
 
       <TextField
         variant="standard"
         name="Contact-Number"
         label="Contact-Number"
+        value={tel}
+        onChange={(e) => onTelChange(e.target.value)}
       />
 
       <FormControl variant="standard">
         <InputLabel id="venue-label">Venue</InputLabel>
-        <Select variant="standard" labelId="venue-label" id="venue" defaultValue="">
+        <Select
+          variant="standard"
+          labelId="venue-label"
+          id="venue"
+          value={venue}
+          onChange={(e) => onVenueChange(e.target.value)}
+        >
           <MenuItem value="Bloom">The Bloom Pavilion</MenuItem>
           <MenuItem value="Spark">Spark Space</MenuItem>
           <MenuItem value="GrandTable">The Grand Table</MenuItem>

@@ -9,11 +9,14 @@ export default async function TopMenu() {
   return (
     <header className="flex w-full items-center justify-between border-b border-gray-200 bg-white px-6 py-3">
       <nav className="w-full flex items-center justify-between">
+        <div className="flex items-center">
         {session ? (
           <TopMenuItem label="Sign-Out" href="/api/auth/signout" />
         ) : (
           <TopMenuItem label="Sign-In" href="/api/auth/signin" />
         )}
+        <TopMenuItem label="My Booking" href="/mybooking" />
+        </div>
         <div className="flex items-center">
           <TopMenuItem label="Booking" href="/booking" />
           <div className="relative h-10 w-40">
